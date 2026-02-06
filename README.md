@@ -1,75 +1,102 @@
 # XML Converter
 
-> XMLファイルをブラウザで変換・プレビュー・PDF出力できるWebアプリケーション
+XMLファイルをHTMLに変換してプレビュー表示し、PDF出力できるWebアプリケーションです。XSLTスタイルシートによるカスタム変換にも対応しています。
 
-[![React](https://img.shields.io/badge/React-19.2.4-61DAFB?logo=react)](https://react.dev/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.8.2-3178C6?logo=typescript)](https://www.typescriptlang.org/)
-[![Vite](https://img.shields.io/badge/Vite-6.2.0-646CFF?logo=vite)](https://vitejs.dev/)
+## 機能
 
-## 概要
+- ✅ XMLファイルのアップロード（ドラッグ&ドロップ対応）
+- ✅ XSLTスタイルシートによる変換（オプション）
+- ✅ リアルタイムHTMLプレビュー
+- ✅ PDF形式でのダウンロード
+- ✅ ZIPファイル対応（複数ファイルを一括アップロード）
+- ✅ ダークモード未対応のシンプルなUI
 
-XSLTスタイルシートを使用してXMLファイルをHTML形式に変換し、リアルタイムプレビューとPDF出力が可能なシングルページアプリケーションです。すべての処理がブラウザ上で完結するため、サーバーへのファイルアップロードは不要で、安全に利用できます。
+## 技術スタック
 
-### 主な機能
+- **フレームワーク**: React 19 + TypeScript
+- **ビルドツール**: Vite
+- **スタイリング**: Tailwind CSS
+- **PDF生成**: jsPDF + html2canvas
+- **アイコン**: lucide-react
+- **その他**: jszip, dompurify
 
-- **XML/XSLT変換**: XSLTスタイルシートによるXML変換とリアルタイムプレビュー
-- **PDF出力**: 変換結果を高品質なPDFファイルとして保存
-- **ZIP対応**: ZIPファイルから複数のXML/XSLファイルを選択して一括処理
-- **ドラッグ&ドロップ**: 直感的なファイルアップロード操作
-- **クライアントサイド処理**: すべての処理がブラウザ内で完結し、プライバシーを保護
-
-## セットアップ
+## 開発環境のセットアップ
 
 ### 必要な環境
 
-- Node.js 20 以上
-- npm または yarn
+- Node.js 20.x 以上
+- npm 9.x 以上
 
 ### インストール
 
 ```bash
+# リポジトリのクローン
+git clone <repository-url>
+cd xml-converter
+
+# 依存関係のインストール
 npm install
-```
 
-### 開発サーバーの起動
-
-```bash
+# 開発サーバーの起動
 npm run dev
 ```
 
-`http://localhost:3000` でアプリケーションが起動します。
+開発サーバーは `http://localhost:5173` で起動します。
+
+## スクリプト
+
+| コマンド | 説明 |
+|---------|------|
+| `npm run dev` | 開発サーバーを起動 |
+| `npm run build` | 本番用ビルド（型チェック + ビルド） |
+| `npm run preview` | ビルド結果をプレビュー |
+| `npm run lint` | ESLintによるコードチェック |
+| `npm run lint:fix` | ESLintによる自動修正 |
+
+## Docker
+
+### ローカルでの実行
+
+```bash
+# イメージのビルド
+npm run docker:build
+
+# コンテナの起動
+npm run docker:run
+```
+
+アプリケーションは `http://localhost:8080` でアクセスできます。
+
+### ヘルスチェック付きテスト実行
+
+```bash
+npm run docker:test
+```
 
 ## 使い方
 
-1. **XMLファイルのアップロード**: サイドバーからXMLファイルをアップロードまたはドラッグ&ドロップ
-2. **XSLTファイルの選択（オプション）**: 変換用のXSLTスタイルシートを指定
-3. **プレビュー確認**: 変換結果が自動的にプレビューエリアに表示されます
-4. **PDF出力**: 必要に応じて「PDFをダウンロード」ボタンでエクスポート
+### 基本的な使い方
 
-## コマンド
+1. **XMLファイルをアップロード**  
+   サイドバーの「XMLファイル選択」ボタンをクリック、またはファイルをドラッグ&ドロップ
 
-```bash
-# 開発サーバー起動
-npm run dev
+2. **プレビュー確認**  
+   アップロードしたXMLが自動的にHTMLに変換され、右側のプレビューエリアに表示されます
 
-# 本番用ビルド
-npm run build
+3. **PDF出力**  
+   「PDFダウンロード」ボタンをクリックして、変換結果をPDF形式で保存
 
-# ビルド結果のプレビュー
-npm run preview
+### XSLTスタイルシートを使った変換
 
-# コードチェック
-npm run lint
+1. XMLファイルをアップロード後、「XSLTファイル選択」ボタンをクリック
+2. XSLTファイル（`.xsl`, `.xslt`）を選択
+3. 自動的にXSLT変換が適用されたHTMLがプレビュー表示されます
 
-# 自動修正
-npm run lint:fix
+### ZIPファイルのアップロード
 
-# Dockerイメージのビルド
-npm run docker:build
-
-# Dockerコンテナのヘルスチェック
-npm run docker:test
-```
+1. サイドバーの「ZIPファイル選択」ボタンをクリック、またはZIPファイルをドラッグ&ドロップ
+2. ZIP内のファイル一覧が表示されるので、変換したいXMLとXSLTを選択
+3. 「変換開始」ボタンをクリック
 
 ## プロジェクト構成
 
@@ -77,51 +104,117 @@ npm run docker:test
 xml-converter/
 ├── src/
 │   ├── components/        # Reactコンポーネント
-│   ├── hooks/             # カスタムフック
-│   ├── utils/             # ユーティリティ関数
-│   └── types/             # TypeScript型定義
-├── .github/workflows/     # CI/CDパイプライン
-├── Dockerfile             # コンテナ設定
-├── nginx.conf             # Webサーバー設定
-└── vite.config.ts         # ビルド設定
+│   │   ├── DocumentPreview.tsx
+│   │   ├── FileUploader.tsx
+│   │   ├── Icons.tsx
+│   │   ├── PreviewSection.tsx
+│   │   ├── Sidebar.tsx
+│   │   └── ZipSelectionModal.tsx
+│   ├── hooks/            # カスタムフック
+│   │   ├── useXmlConverter.ts
+│   │   └── useZipUpload.ts
+│   ├── utils/            # ユーティリティ関数
+│   │   ├── logger.ts
+│   │   ├── pdfUtils.ts
+│   │   └── xmlProcessor.ts
+│   ├── types/            # TypeScript型定義
+│   │   └── index.ts
+│   ├── App.tsx           # メインコンポーネント
+│   └── main.tsx          # エントリーポイント
+├── .cursor/              # Cursorエディタ設定
+│   ├── commands/         # カスタムコマンド
+│   └── rules/            # コーディング規約
+├── .github/
+│   └── workflows/        # GitHub Actions CI/CD
+├── Dockerfile            # Dockerイメージ定義
+├── nginx.conf            # Nginx設定
+└── package.json
 ```
-
-## 技術スタック
-
-- **React 19** - UIフレームワーク
-- **TypeScript** - 型安全な開発
-- **Vite** - 高速ビルドツール
-- **Tailwind CSS** - スタイリング
-- **html2canvas + jsPDF** - PDF生成
-- **jszip** - ZIPファイル処理
-- **lucide-react** - アイコンライブラリ
 
 ## デプロイ
 
-### GitHub Actions
+### Google Cloud Run
 
-`main`ブランチへのプッシュで自動的にGoogle Cloud Runへデプロイされます。詳細は [SETUP-GITHUB-ACTIONS.md](./SETUP-GITHUB-ACTIONS.md) を参照してください。
+このプロジェクトはGoogle Cloud Runへの自動デプロイに対応しています。
 
-### Docker
+**必要な設定:**
 
-```bash
-docker build -t xml-converter .
-docker run -p 8080:8080 xml-converter
+1. GCPプロジェクトIDを取得
+2. サービスアカウントキーを生成
+3. GitHub Secretsに以下を設定:
+   - `GCP_PROJECT_ID`: GCPプロジェクトID
+   - `GCP_SA_KEY`: サービスアカウントキー（JSON）
+
+**デプロイフロー:**
+
+- `main` ブランチへのプッシュで自動デプロイ
+- Pull Request作成時はビルド・テストのみ実行
+- 手動デプロイも可能（GitHub Actions > Deploy to Cloud Run > Run workflow）
+
+## コーディング規約
+
+プロジェクトの詳細なコーディング規約は `.cursor/rules/` を参照してください。
+
+### 主な規則
+
+- ❌ `any` 型の使用禁止
+- ❌ `console.log` の残置禁止（デバッグ後は削除）
+- ❌ `console.error` の使用禁止（`logError` を使用）
+- ✅ Tailwind CSSを使用（インラインスタイル・CSSファイル禁止）
+- ✅ コメントはWHY（理由）を説明
+
+### コミットメッセージ
+
+```
+feat: 新機能追加
+fix: バグ修正
+docs: ドキュメント更新
+refactor: リファクタリング
+chore: 雑務（設定変更等）
 ```
 
-詳細は [README.cloud-run.md](./README.cloud-run.md) を参照してください。
+詳細は [git-commit-messages.mdc](.cursor/rules/git-commit-messages.mdc) を参照。
 
-## 開発ガイドライン
+## トラブルシューティング
 
-このプロジェクトでは以下のコーディング規約を採用しています：
+### 開発サーバーが起動しない
 
-- `any`型の使用禁止
-- `console.log`/`console.error`の代わりに`logger.ts`を使用
-- Tailwind CSSによるスタイリング（CSSファイル・インラインスタイル禁止）
-- 既存コンポーネントの再利用を優先
+```bash
+# node_modulesとキャッシュを削除して再インストール
+rm -rf node_modules package-lock.json
+npm install
+npm run dev
+```
 
-詳細は [.cursor/rules/ai-workflow.mdc](.cursor/rules/ai-workflow.mdc) を参照してください。
+### Dockerビルドが失敗する
+
+```bash
+# Dockerキャッシュをクリアして再ビルド
+docker builder prune
+npm run docker:build
+```
+
+### ESLintエラーが解消されない
+
+```bash
+# 自動修正を試す
+npm run lint:fix
+```
 
 ## ライセンス
 
-Private
+このプロジェクトはプライベートプロジェクトです。
+
+## 貢献
+
+このプロジェクトへの貢献を検討いただきありがとうございます。
+プルリクエストを作成する前に、`.cursor/rules/` のコーディング規約を確認してください。
+
+---
+
+**開発者向けコマンド:**
+
+プロジェクトには便利なCursorコマンドが用意されています：
+- `.cursor/commands/dev-run.md` - 開発サーバー起動
+- `.cursor/commands/dev-stop.md` - 開発サーバー停止
+- `.cursor/commands/dev-restart.md` - 開発サーバー再起動
