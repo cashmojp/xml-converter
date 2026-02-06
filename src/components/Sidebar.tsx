@@ -2,14 +2,13 @@ import React from 'react';
 import { FileUploader } from '@/components/FileUploader';
 import { FileCodeArrowIcon } from '@/components/Icons';
 import { 
-  FileText, 
   FileJson, 
   RefreshCw, 
   CheckCircle2, 
   AlertCircle, 
   FolderArchive, 
-  ShieldCheck, 
-  FileCode 
+  FileCode,
+  Trash2
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -21,6 +20,7 @@ interface SidebarProps {
   onXmlLoaded: (content: string, name: string) => void;
   onXslLoaded: (content: string, name: string) => void;
   onXslRemove: () => void;
+  onXmlRemove: () => void;
   onReset: () => void;
   onZipInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onZipDragOver: (e: React.DragEvent) => void;
@@ -37,6 +37,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onXmlLoaded,
   onXslLoaded,
   onXslRemove,
+  onXmlRemove,
   onReset,
   onZipInputChange,
   onZipDragOver,
@@ -128,20 +129,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 <div className="relative z-10">
                   <div className="flex items-center space-x-3 mb-2">
                     <div className="bg-emerald-100 p-2 rounded">
-                      <ShieldCheck className="w-5 h-5 text-emerald-600" />
+                      <FileJson className="w-5 h-5 text-emerald-600" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium text-slate-900 truncate" title={xslFileName}>{xslFileName}</p>
                       <p className="text-xs text-emerald-600">スタイル適用中</p>
                     </div>
                   </div>
-                  <div className="flex justify-between items-center">
-                     <button 
-                       onClick={onXslRemove}
-                       className="text-xs text-red-500 hover:text-red-700"
-                     >
-                       削除
-                     </button>
+                  <div className="flex justify-end items-center space-x-3">
                      <label className="text-xs text-emerald-600 hover:text-emerald-800 font-medium cursor-pointer transition-colors">
                         ファイルを変更
                         <input type="file" className="hidden" accept=".xsl,.xslt" onChange={(e) => {
@@ -156,6 +151,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
                           }
                         }} />
                      </label>
+                     <button 
+                       onClick={onXslRemove}
+                       className="text-slate-400 hover:text-red-500 transition-colors"
+                       title="削除"
+                     >
+                       <Trash2 className="w-3.5 h-3.5" />
+                     </button>
                   </div>
                 </div>
               </div>
@@ -195,14 +197,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <div className="bg-white border border-slate-200 rounded-lg p-3 shadow-sm">
                 <div className="flex items-center space-x-3 mb-2">
                   <div className="bg-blue-100 p-2 rounded">
-                    <FileText className="w-5 h-5 text-blue-600" />
+                    <FileCode className="w-5 h-5 text-blue-600" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium text-slate-900 truncate" title={xmlFileName}>{xmlFileName}</p>
                     <p className="text-xs text-slate-500">読み込み完了</p>
                   </div>
                 </div>
-                <div className="flex justify-end">
+                <div className="flex justify-end items-center space-x-3">
                    <label className="text-xs text-blue-600 hover:text-blue-800 font-medium cursor-pointer transition-colors">
                       ファイルを変更
                       <input type="file" className="hidden" accept=".xml" onChange={(e) => {
@@ -217,6 +219,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
                         }
                       }} />
                    </label>
+                   <button 
+                     onClick={onXmlRemove}
+                     className="text-slate-400 hover:text-red-500 transition-colors"
+                     title="削除"
+                   >
+                     <Trash2 className="w-3.5 h-3.5" />
+                   </button>
                 </div>
               </div>
             )}

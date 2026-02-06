@@ -51,6 +51,13 @@ export const useXmlConverter = () => {
     }
   };
 
+  const handleXmlRemove = () => {
+    setXmlContent(null);
+    setXmlFileName(null);
+    setHtmlContent(null);
+    setErrorMsg(null);
+  };
+
   const handleDownload = async () => {
     if (!xmlFileName) return;
     setIsGeneratingPdf(true);
@@ -88,6 +95,7 @@ export const useXmlConverter = () => {
     handleXmlLoaded,
     handleXslLoaded,
     handleXslRemove,
+    handleXmlRemove,
     handleDownload,
     handleReset,
     processContent,

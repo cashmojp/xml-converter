@@ -9,7 +9,7 @@ XMLファイルをHTMLに変換してプレビュー表示し、PDF出力でき�
 - ✅ リアルタイムHTMLプレビュー
 - ✅ PDF形式でのダウンロード
 - ✅ ZIPファイル対応（複数ファイルを一括アップロード）
-- ✅ ダークモード未対応のシンプルなUI
+- ✅ シンプルで直感的なUI
 
 ## 技術スタック
 
@@ -30,10 +30,6 @@ XMLファイルをHTMLに変換してプレビュー表示し、PDF出力でき�
 ### インストール
 
 ```bash
-# リポジトリのクローン
-git clone <repository-url>
-cd xml-converter
-
 # 依存関係のインストール
 npm install
 
@@ -68,6 +64,8 @@ npm run docker:run
 アプリケーションは `http://localhost:8080` でアクセスできます。
 
 ### ヘルスチェック付きテスト実行
+
+コンテナを起動し、ヘルスチェックエンドポイント（`/health`）の動作を確認後、自動でクリーンアップします。
 
 ```bash
 npm run docker:test
@@ -179,6 +177,15 @@ chore: 雑務（設定変更等）
 
 ### 開発サーバーが起動しない
 
+**Windows (PowerShell):**
+```powershell
+# node_modulesとキャッシュを削除して再インストール
+Remove-Item -Recurse -Force node_modules, package-lock.json
+npm install
+npm run dev
+```
+
+**Linux/macOS:**
 ```bash
 # node_modulesとキャッシュを削除して再インストール
 rm -rf node_modules package-lock.json
@@ -200,6 +207,13 @@ npm run docker:build
 # 自動修正を試す
 npm run lint:fix
 ```
+
+## 今後の予定
+
+- 🌙 ダークモード対応
+- 📦 複数XMLファイルの一括変換
+- 💾 変換履歴の保存機能
+- 🔍 XMLバリデーション機能
 
 ## ライセンス
 

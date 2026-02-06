@@ -18,6 +18,7 @@ const App: React.FC = () => {
     handleXmlLoaded,
     handleXslLoaded,
     handleXslRemove,
+    handleXmlRemove,
     handleDownload,
     handleReset,
     processContent,
@@ -77,6 +78,7 @@ const App: React.FC = () => {
         onXmlLoaded={handleXmlLoaded}
         onXslLoaded={handleXslLoaded}
         onXslRemove={handleXslRemove}
+        onXmlRemove={handleXmlRemove}
         onReset={handleReset}
         onZipInputChange={handleZipInputChange}
         onZipDragOver={handleZipDragOver}
