@@ -1,0 +1,40 @@
+---
+description: 外部ライブラリの追加方針
+globs:
+  - "package.json"
+---
+
+# 依存関係ガイドライン
+
+## 基本方針
+
+1. 標準Reactの機能で実装
+2. 既存コンポーネント・フックを活用
+3. 必要な場合のみ軽量ライブラリを追加
+
+## 検討してよいライブラリ
+
+| 用途 | ライブラリ | 条件 |
+|------|-----------|------|
+| フォーム | `react-hook-form` + `zod` | 複雑なフォームが3つ以上 |
+| 日付 | `date-fns` | 日付計算が必要 |
+| マークダウン | `react-markdown` | MD表示が必要 |
+| アイコン | `lucide-react` | Iconsで不足時 |
+| アニメーション | `framer-motion` | 複雑なアニメーション |
+| 状態管理 | `zustand` | Context APIで複雑になった時 |
+
+## 避けるべきライブラリ
+
+| ライブラリ | 理由 | 代替 |
+|-----------|------|------|
+| moment.js | 重い | date-fns |
+| lodash（全体） | 重い | 個別import or 自作 |
+| Redux | 過剰 | Context API, zustand |
+| styled-components | Tailwindと競合 | Tailwind |
+| Material-UI | 重い | 自作コンポーネント |
+
+## 追加前の確認
+
+- 標準機能や既存コードで代替できないか
+- TypeScript対応しているか
+- メンテナンスされているか（1年以内の更新）

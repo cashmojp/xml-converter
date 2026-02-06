@@ -1,0 +1,49 @@
+---
+description: 環境変数の設定方法
+globs:
+  - ".env*"
+  - "src/config.ts"
+  - "vite.config.ts"
+---
+
+# 環境変数
+
+## 基本ルール
+
+- `VITE_` プレフィックスが必須（Viteの仕様）
+- `.env` は `.gitignore` に含まれる
+- `.env.example` にサンプルを記載（機密情報は含めない）
+
+## 使用方法
+
+```typescript
+// 推奨: config.ts 経由でアクセス
+import { config } from './config'
+const apiUrl = config.api.baseUrl
+
+// 直接アクセス（非推奨）
+const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000/api'
+```
+
+## config.ts と constants.ts の使い分け
+
+| ファイル | 用途 | 例 |
+|----------|------|-----|
+| `config.ts` | 環境依存の設定 | API URL, APIキー, 環境フラグ |
+| `constants.ts` | 固定の定数値 | アプリ名, ストレージキー, バリデーション |
+
+## セキュリティ注意事項
+
+**Viteの環境変数はブラウザで見える**
+
+- ✅ API URL、アプリ名、公開設定
+- ❌ パスワード、プライベートキー、DBの認証情報
+
+機密情報はバックエンドで管理すること。
+
+## よくある問題
+
+| 問題 | 原因 | 解決策 |
+|------|------|--------|
+| `undefined`になる | `VITE_`がない | プレフィックスを追加 |
+| 変更が反映されない | キャッシュ | 開発サーバーを再起動 |

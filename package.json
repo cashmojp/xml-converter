@@ -1,0 +1,42 @@
+{
+  "name": "xml-converter",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "preview": "vite preview",
+    "docker:build": "docker build -t xml-converter .",
+    "docker:run": "docker run -p 8080:8080 xml-converter",
+    "docker:test": "docker run -d -p 8080:8080 --name test-xml-converter xml-converter && sleep 3 && curl http://localhost:8080/health && docker stop test-xml-converter && docker rm test-xml-converter"
+  },
+  "dependencies": {
+    "dompurify": "^3.3.1",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^4.1.0",
+    "jszip": "^3.10.1",
+    "lucide-react": "^0.563.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.2",
+    "@types/node": "^22.14.0",
+    "@types/react": "^19.2.13",
+    "@types/react-dom": "^19.2.3",
+    "@typescript-eslint/eslint-plugin": "^8.54.0",
+    "@typescript-eslint/parser": "^8.54.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "eslint": "^9.39.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.5.0",
+    "globals": "^17.3.0",
+    "typescript": "~5.8.2",
+    "typescript-eslint": "^8.54.0",
+    "vite": "^6.2.0"
+  }
+}

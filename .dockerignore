@@ -1,0 +1,28 @@
+# ビルド・デプロイに不要なファイルを除外してイメージサイズを削減
+
+node_modules
+npm-debug.log
+.env
+.env.local
+.git
+.gitignore
+.vscode
+.cursor
+
+# ビルド成果物
+dist
+
+# テスト関連
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+
+# ドキュメント
+README.md
+*.md
+docs
+
+# その他
+.DS_Store
+Thumbs.db

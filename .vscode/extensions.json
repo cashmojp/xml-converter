@@ -1,0 +1,19 @@
+{
+  "recommendations": [
+    // Tailwind CSS - クラス名補完、プレビュー
+    "bradlc.vscode-tailwindcss",
+
+    // ESLint - コード品質チェック
+    "dbaeumer.vscode-eslint",
+
+    // Prettier - コードフォーマッター
+    "esbenp.prettier-vscode",
+
+    // TypeScript/React向け
+    "dsznajder.es7-react-js-snippets",
+
+    // エラー表示強化
+    "usernamehw.errorlens"
+  ],
+  "unwantedRecommendations": []
+}

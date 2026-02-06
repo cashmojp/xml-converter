@@ -1,0 +1,5 @@
+{
+  "name": "XML Converter",
+  "description": "厳格なXML/XSLT処理を行い、公文書に適した正確なPDFレポートを作成するツールです。",
+  "requestFramePermissions": []
+}

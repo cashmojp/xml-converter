@@ -1,0 +1,88 @@
+---
+description: Git コミットメッセージ規約と PowerShell でのコミット方法
+alwaysApply: true
+---
+
+# コミットメッセージ規約
+
+## 基本方針
+- **日本語で記述**
+- **1-2行で簡潔に要点を記載**
+- **何をしたか（WHAT）を明確に**
+
+## プレフィックス（推奨）
+コミットの種類を明確にするため、以下のプレフィックスを使用：
+
+- `feat:` 新機能追加
+- `fix:` バグ修正
+- `docs:` ドキュメント更新のみ
+- `refactor:` リファクタリング（機能変更なし）
+- `chore:` 雑務（依存関係更新、設定変更等）
+- `style:` コードスタイル変更（フォーマット、セミコロン等）
+
+## 例
+- `feat: Gemini API連携の証憑解析機能を追加`
+- `fix: PDF変換時のメモリリーク修正`
+- `docs: README環境構築手順を更新`
+- `refactor: useEvidenceQueueフックの状態管理を最適化`
+- `chore: ESLint 9 Flat Configへ移行`
+
+## 注意事項
+- プレフィックスはオプション（必須ではない）
+- 重要なのは変更内容が明確であること
+- コミットは論理的な単位でまとめる
+
+---
+
+# PowerShell 環境でのコミット方法
+
+## 複数行のコミットメッセージ作成
+
+PowerShell では Bash/Zsh の HEREDOC 構文 (`cat <<'EOF'`) が使えません。
+代わりに PowerShell のヒアストリング構文を使用します。
+
+### ✅ 推奨方法：PowerShell ヒアストリング
+
+```powershell
+$msg = @"
+feat: 新機能の追加
+
+詳細な説明をここに記述します。
+複数行のメッセージも問題ありません。
+"@
+git commit -m $msg
+```
+
+### ❌ 使用不可：Bash HEREDOC（PowerShell では動作しません）
+
+```bash
+# PowerShell では動作しません
+git commit -m "$(cat <<'EOF'
+Commit message here.
+EOF
+)"
+```
+
+### 代替方法1：バッククォートで改行
+
+```powershell
+git commit -m "feat: 新機能の追加`n`n詳細な説明"
+```
+
+### 代替方法2：ファイル経由
+
+```powershell
+@"
+feat: 新機能の追加
+
+詳細な説明
+"@ | Out-File -FilePath commit_msg.txt -Encoding utf8
+git commit -F commit_msg.txt
+Remove-Item commit_msg.txt
+```
+
+## 重要なポイント
+
+- **AI エージェントは PowerShell 環境を検出したら自動的にヒアストリング構文を使用する**
+- 変数 `$msg` を使った方法が最も読みやすく、エラーが少ない
+- 日本語メッセージも正常に動作する（UTF-8 エンコーディング）
