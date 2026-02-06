@@ -249,12 +249,3 @@ npm run lint:fix
 
 このプロジェクトへの貢献を検討いただきありがとうございます。
 プルリクエストを作成する前に、このREADMEの「コーディング規約」セクションを確認してください。
-
----
-
-**開発者向けコマンド:**
-
-プロジェクトには便利なCursorコマンドが用意されています：
-- `.cursor/commands/dev-run.md` - 開発サーバー起動
-- `.cursor/commands/dev-stop.md` - 開発サーバー停止
-- `.cursor/commands/dev-restart.md` - 開発サーバー再起動
